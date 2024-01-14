@@ -1,5 +1,6 @@
 class SCPIInterface:
-    def __init__(self):
+    def __init__(self, newLineCharacter = "\n"):
+        self._newLine = newLineCharacter
         pass
 
     def open(self):
