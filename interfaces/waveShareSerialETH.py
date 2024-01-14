@@ -1,5 +1,5 @@
 import socket
-from SCPI import SCPIInterface
+from Python_SCPI.SCPI import SCPIInterface
 
 class WaveShareSerialETH(SCPIInterface):
     def __init__(self, IP, PORT, newLineCharacter = "\n"):

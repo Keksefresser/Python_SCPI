@@ -1,4 +1,4 @@
-from SCPI import SCPI, SCPIInterface
+from Python_SCPI.SCPI import SCPI, SCPIInterface
 
 class powerSupply(SCPI):
     class _powerSupplyChannel:

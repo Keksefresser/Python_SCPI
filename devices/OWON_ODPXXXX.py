@@ -1,5 +1,5 @@
-from powerSupply import powerSupply
-from SCPI import SCPI, SCPIInterface
+from Python_SCPI.devices.powerSupply import powerSupply
+from Python_SCPI.SCPI import SCPIInterface
 
 class OWON_ODPXXXX(powerSupply):
     class _owonChannel:
