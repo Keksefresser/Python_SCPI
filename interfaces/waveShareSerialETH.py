@@ -2,23 +2,23 @@ import socket
 from Python_SCPI.SCPI import SCPIInterface
 
 class WaveShareSerialETH(SCPIInterface):
-    def __init__(self, IP, PORT, newLineCharacter = "\n"):
-        SCPIInterface.__init__(self, newLineCharacter)
+    def __init__(self, IP, PORT, newLineCharacter = "\n", debug = False):
+        SCPIInterface.__init__(self, newLineCharacter, debug)
         self.IP = IP
         self.PORT = PORT
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.recBuffer = bytearray()
 
-    def open(self):
+    def _open(self):
         self.socket.connect((self.IP, self.PORT))
 
-    def close(self):
+    def _close(self):
         self.socket.close()
 
-    def write(self, data : str):
+    def _write(self, data : str):
         self.socket.sendall((data+self._newLine).encode("ASCII"))
 
-    def read(self, size=1) -> str:
+    def _read(self, size=1) -> str:
         if(len(self.recBuffer) < size):
             tmp = self.socket.recv(size - len(self.recBuffer))
             for b in tmp:

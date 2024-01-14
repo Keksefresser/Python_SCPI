@@ -1,11 +1,10 @@
-from Python_SCPI.devices.powerSupply import powerSupply
+from Python_SCPI.devices.powerSupply import powerSupply, powerSupplyChannel
 from Python_SCPI.SCPI import SCPIInterface
 
 class OWON_ODPXXXX(powerSupply):
-    class _owonChannel:
+    class _owonChannel(powerSupplyChannel):
         def __init__(self, interface : SCPIInterface, channelNumber):
-            self._IF = interface
-            self._CH = channelNumber
+            powerSupplyChannel.__init__(self, interface, channelNumber)
             self._cmd_select_channel = "INST:NSEL {channel}"
             self._cmd_set_output = "CHAN:OUTP {state}"
             self._cmd_get_output = "CHAN:OUTP?"
@@ -13,6 +12,9 @@ class OWON_ODPXXXX(powerSupply):
             self._cmd_get_volt = "VOLT?"
             self._cmd_set_current = "CURR {curr}"
             self._cmd_get_current = "CURR?"
+            self._cmd_meas_volt = "MEAS:VOLT?"
+            self._cmd_meas_current = "MEAS:CURR?"
+            self._cmd_meas_power = "MEAS:POW?"
 
     def __init__(self, interface : SCPIInterface):
         powerSupply.__init__(self, interface)

@@ -1,24 +1,42 @@
-class SCPIInterface:
-    def __init__(self, newLineCharacter = "\n"):
+class SCPIInterface(object):
+    def __init__(self, newLineCharacter = "\n", debug : bool = False):
         self._newLine = newLineCharacter
+        self._dbg = debug
         pass
 
     def open(self):
-        raise NotImplementedError("Function not implemented. Implementation is expected in derived class.")
+        self._open()
 
     def close(self):
-        raise NotImplementedError("Function not implemented. Implementation is expected in derived class.")
+        self._close()
 
     def write(self, data : str):
-        raise NotImplementedError("Function not implemented. Implementation is expected in derived class.")
+        if(self._dbg):
+            print(f"[TX]: {data}")
+        self._write(data)
 
     def read(self, size=1) -> str:
+        data = self._read(size)
+        if(self._dbg):
+            print(f"[RX]: {data}")
+        return data
+
+    def _open(self):
         raise NotImplementedError("Function not implemented. Implementation is expected in derived class.")
 
-class SCPI:
+    def _close(self):
+        raise NotImplementedError("Function not implemented. Implementation is expected in derived class.")
+
+    def _write(self, data : str):
+        raise NotImplementedError("Function not implemented. Implementation is expected in derived class.")
+
+    def _read(self, size=1) -> str:
+        raise NotImplementedError("Function not implemented. Implementation is expected in derived class.")
+
+class SCPI(object):
     def __init__(self, interface : SCPIInterface):
         self._IF = interface
-        self._cmd_get_id = "*IDN?\n"
+        self._cmd_get_id = "*IDN?"
 
     def connect(self) -> bool:
         try:
