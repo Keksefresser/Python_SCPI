@@ -2,3 +2,5 @@ __pycache__/SCPI.cpython-39.pyc
 devices/__pycache__/OWON_ODPXXXX.cpython-39.pyc
 devices/__pycache__/powerSupply.cpython-39.pyc
 interfaces/__pycache__/waveShareSerialETH.cpython-39.pyc
+devices/__pycache__/KEITHLEY_2015.cpython-39.pyc
+devices/__pycache__/multimeter.cpython-39.pyc

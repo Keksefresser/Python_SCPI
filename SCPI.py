@@ -12,13 +12,13 @@ class SCPIInterface(object):
 
     def write(self, data : str):
         if(self._dbg):
-            print(f"[TX]: {data}")
+            print(f"[TX {len(data) : 4d}]: {data.encode('ASCII')}")
         self._write(data)
 
     def read(self, size=1) -> str:
         data = self._read(size)
         if(self._dbg):
-            print(f"[RX]: {data}")
+            print(f"[RX {len(data) : 4d}]: {data.encode('ASCII')}")
         return data
 
     def _open(self):
@@ -51,4 +51,4 @@ class SCPI(object):
 
     def getID(self) -> str:
         self._IF.write(self._cmd_get_id)
-        return self._IF.read(40)
+        return self._IF.read(80)
