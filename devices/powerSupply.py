@@ -98,6 +98,11 @@ class powerSupply(SCPI):
         self._cmd_select_channel = ""
         self._cmd_enable_channel = ""
         self._cmd_disable_channel = ""
+        self._cmd_reset = "*RST"
+
+    def reset(self):
+        if(self._cmd_reset):
+            self._IF.write(self._cmd_reset)
 
     def remote(self):
         if(self._cmd_enable_remote):

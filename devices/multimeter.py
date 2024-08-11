@@ -5,6 +5,7 @@ class multimeter(SCPI):
         SCPI.__init__(self, interface)
         self._cmd_enable_remote = "SYST:REM"
         self._cmd_disable_remote = "SYST:LOC"
+        self._cmd_reset = "*RST"
         self._cmd_take_reading = ""
 
     def remote(self):
@@ -19,4 +20,8 @@ class multimeter(SCPI):
         if(self._cmd_take_reading):
             self._IF.write(self._cmd_take_reading)
             return float(self._IF.read(40))
+        
+    def reset(self):
+        if(self._cmd_reset):
+            self._IF.write(self._cmd_reset)
         
